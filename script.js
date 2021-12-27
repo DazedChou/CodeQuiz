@@ -1,7 +1,7 @@
-quizEl = document.querySelector("#quiz");
-resultsEl = document.querySelector("#results");
-startEl = document.querySelector("#start");
-submitEl = document.querySelector("#submit");
+var quizEl = document.querySelector("#quiz");
+var resultsEl = document.querySelector("#results");
+var startEl = document.querySelector("#start");
+var submitEl = document.querySelector("#submit");
 
 var timer = 60;
 var score = 0;
@@ -70,11 +70,39 @@ var questions = [
     },
 ]
 
+console.log(quizEl.children[0]);
+
 
 function startGame(){
+    startEl.textContent = "Next";
+    var countdown = document.createElement("div");
     
+    quizEl.appendChild(countdown);
+
+    //create timer and update time every second
+    var timerInterval = setInterval(function() {
+        
+        countdown.textContent = timer;
+        timer--;
+
+        if(timer === 0){
+            clearInterval(timerInterval);
+
+            //Go display results
+        }
+    }, 1000);
+
+    //Display Quiz Questions
+
 }
 
 function displayResults(){
 
 }
+
+//when the Start button is clicked, then start the game
+startEl.addEventListener("click", function(){
+
+    startGame();
+
+});
