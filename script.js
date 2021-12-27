@@ -3,6 +3,7 @@ var resultsEl = document.querySelector("#results");
 var startEl = document.querySelector("#start");
 var submitEl = document.querySelector("#submit");
 var choicesEl = document.querySelector("#choiceSelection");
+var timeEl = document.querySelector("#timeLeft");
 
 var timer = 60;
 var score = 0;
@@ -78,17 +79,22 @@ function startGame(){
 
     document.querySelector(".button").removeChild(startEl);
     var nextQuestion = document.createElement("button");
+    nextQuestion.textContent="Next";
     document.querySelector(".button").appendChild(nextQuestion);
+
+    quizEl.children[1].textContent="";
+
+    //quizEl.children[1].innerHTML="<h1>hi</h1>";
     // startEl.textContent = "Next";
-    var countdown = document.createElement("div");
-    
-    quizEl.appendChild(countdown);
+
+    // var countdown = document.createElement("div");
+    // quizEl.appendChild(countdown);
 
     //create timer and update time every second
     var timerInterval = setInterval(function() {
         
-        countdown.textContent = timer;
         timer--;
+        timeEl.textContent = "Time Left: " + timer;
 
         if(timer === 0){
             clearInterval(timerInterval);
@@ -97,8 +103,7 @@ function startGame(){
         }
     }, 1000);
 
-    //Display Quiz Questions
-    var choices = document.createElement("div");
+    //Create button choices
     var choiceA = document.createElement("button");
     var choiceB = document.createElement("button");
     var choiceC = document.createElement("button");
@@ -109,14 +114,15 @@ function startGame(){
     choicesEl.appendChild(choiceC);
     choicesEl.appendChild(choiceD);
 
-    for(var i = 0; i < questions.length ; i++){
-        quizEl.children[0].textContent = questions[i].question;
-        choiceA.textContent = questions[i].answers.a;
-        choiceB.textContent = questions[i].answers.b;
-        choiceC.textContent = questions[i].answers.c;
-        choiceD.textContent = questions[i].answers.d;
+    //Display quiz questions
 
-    }
+    //Question 1
+    quizEl.children[0].textContent = questions[0].question;
+    choiceA.textContent = "1." + questions[0].answers.a;
+    choiceB.textContent = "2." +  questions[0].answers.b;
+    choiceC.textContent = "3." +  questions[0].answers.c;
+    choiceD.textContent = "4." +  questions[0].answers.d;
+
 
 
 }
