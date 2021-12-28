@@ -7,8 +7,23 @@ var timeEl = document.querySelector("#timeLeft");
 
 var timer = 60;
 var score = 0;
+var i = 0; //index to track current question
+
+console.log(i);
 
 //create array of object of questions and corresponding answers
+// var question = ["Commonly used data types DO NOT include: ",
+// "The condition in an if/else statement is enclosed within _______.",
+// "Arrays in JavaScript can be used to store _______.",
+// "String values must be enclosed within ____ when being assigned to variables.",
+// "A very useful tool used during development and debugging for printing content to the debugger is: ",
+// "Inside which HTML element do we put the JavaScript?"];
+
+// var answerA = ["strings","quotes","numbers and strings","commas","Javascript","<js>"];
+// var answerB = ["booleans","curly brackets","other arrays","curly brackets","console.log","<script>"];
+// var answerC = ["alerts","parentheses","booleans","quotes","terminal/bash","<javascript>"];
+// var answerD = ["numbers","square brackets","all of the above","parenthesis","for loops","<scripting>"];
+
 var questions = [
     {
         question: "Commonly used data types DO NOT include: ",
@@ -72,8 +87,6 @@ var questions = [
     },
 ]
 
-console.log(quizEl.children[0]);
-
 
 function startGame(){
 
@@ -82,13 +95,7 @@ function startGame(){
     // nextQuestion.textContent="Next";
     // document.querySelector(".button").appendChild(nextQuestion);
 
-    quizEl.children[1].textContent="";
-
-    //quizEl.children[1].innerHTML="<h1>hi</h1>";
-    // startEl.textContent = "Next";
-
-    // var countdown = document.createElement("div");
-    // quizEl.appendChild(countdown);
+    quizEl.children[1].textContent=""; //removing p content
 
     //create timer and update time every second
     var timerInterval = setInterval(function() {
@@ -96,7 +103,7 @@ function startGame(){
         timer--;
         timeEl.textContent = "Time Left: " + timer;
 
-        if(timer === 0){
+        if(timer === 0 || timer <=0){
             clearInterval(timerInterval);
 
             //Go display results
@@ -117,128 +124,71 @@ function startGame(){
     choicesEl.appendChild(choiceB);
     choicesEl.appendChild(choiceC);
     choicesEl.appendChild(choiceD);
-
+    console.log(choicesEl);
     //Display quiz questions
+ 
+    quizEl.children[0].textContent = questions[i].question;
+    choiceA.textContent = "1." + questions[i].answers.a;
+    choiceB.textContent = "2." +  questions[i].answers.b;
+    choiceC.textContent = "3." +  questions[i].answers.c;
+    choiceD.textContent = "4." +  questions[i].answers.d;
 
-    quizEl.children[0].textContent = questions[0].question;
-    choiceA.textContent = "1." + questions[0].answers.a;
-    choiceB.textContent = "2." +  questions[0].answers.b;
-    choiceC.textContent = "3." +  questions[0].answers.c;
-    choiceD.textContent = "4." +  questions[0].answers.d;
+    choiceA.addEventListener("click",function(){
+        i++;
+        quizEl.children[0].textContent = questions[i].question;
+        choiceA.textContent = "1." + questions[i].answers.a;
+        choiceB.textContent = "2." +  questions[i].answers.b;
+        choiceC.textContent = "3." +  questions[i].answers.c;
+        choiceD.textContent = "4." +  questions[i].answers.d;
+        //there is no question with the correct choice of A,
+        //so whenever user chooses A, time gets deducted by 10.
+        timer = timer - 10;
+    });
+    choiceB.addEventListener("click",function(){
+        i++;
+        quizEl.children[0].textContent = questions[i].question;
+        choiceA.textContent = "1." + questions[i].answers.a;
+        choiceB.textContent = "2." +  questions[i].answers.b;
+        choiceC.textContent = "3." +  questions[i].answers.c;
+        choiceD.textContent = "4." +  questions[i].answers.d;
+        
+        //conditional to check for answer
+        if(i < 4){
+            timer = timer - 10;
+        }else{
+            score++;
+        }
+    });
+    choiceC.addEventListener("click",function(){
+        i++;
+        quizEl.children[0].textContent = questions[i].question;
+        choiceA.textContent = "1." + questions[i].answers.a;
+        choiceB.textContent = "2." +  questions[i].answers.b;
+        choiceC.textContent = "3." +  questions[i].answers.c;
+        choiceD.textContent = "4." +  questions[i].answers.d;
 
-    var j = 0;
-    //check selection
+        //conditional to check for answer
+        if(i == 2 || i == 4 || i == 5){
+            timer = timer - 10;
+        }else{
+            score++;
+        }
+    });
+    choiceD.addEventListener("click",function(){
+        i++;
+        quizEl.children[0].textContent = questions[i].question;
+        choiceA.textContent = "1." + questions[i].answers.a;
+        choiceB.textContent = "2." +  questions[i].answers.b;
+        choiceC.textContent = "3." +  questions[i].answers.c;
+        choiceD.textContent = "4." +  questions[i].answers.d;
 
-    choiceA.addEventListener("click",function (){
-        if(j=0){
+        //conditional to check for answer
+        if(i == 2 ){
+            score++;
+        }else{
             timer = timer - 10;
-            j++;
         }
-        if(j=1){
-            timer = timer - 10;
-            j++;
-        }
-        if(j=2){
-            timer = timer - 10;
-            j++;
-        }
-        if(j=3){
-            timer = timer - 10;
-            j++;
-        }
-        if(j=4){
-            timer = timer - 10;
-            j++;
-        }
-        if(j=5){
-            timer = timer - 10;
-            j++;
-        }   
-        
     });
-    choiceB.addEventListener("click",function (){
-        if(j=0){
-            timer = timer - 10;
-            j++;
-        }
-        if(j=1){
-            timer = timer - 10;
-            j++;
-        }
-        if(j=2){
-            timer = timer - 10;
-            j++;
-        }
-        if(j=3){
-            timer = timer - 10;
-            j++;
-        }
-        if(j=4){
-            score++;
-            j++;
-        }
-        if(j=5){
-            score++;
-            j++;
-        }   
-        
-    });
-    choiceC.addEventListener("click",function (){
-        if(j=0){
-            score++;
-            j++;
-        }
-        if(j=1){
-            score++;
-            j++;
-        }
-        if(j=2){
-            timer = timer - 10;
-            j++;
-        }
-        if(j=3){
-            score++;
-            j++;
-        }
-        if(j=4){
-            timer = timer - 10;
-            j++;
-        }
-        if(j=5){
-            timer = timer - 10;
-            j++;
-        }   
-        
-    });
-    choiceD.addEventListener("click",function (){
-        if(j=0){
-            timer = timer - 10;
-            j++;
-        }
-        if(j=1){
-            timer = timer - 10;
-            j++;
-        }
-        if(j=2){
-            score++;
-            j++;
-        }
-        if(j=3){
-            timer = timer - 10;
-            j++;
-        }
-        if(j=4){
-            timer = timer - 10;
-            j++;
-        }
-        if(j=5){
-            timer = timer - 10;
-            j++;
-        }   
-        
-    });
-
-    console.log(score);
 
 }
 
