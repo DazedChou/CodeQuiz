@@ -1,14 +1,13 @@
 var quizEl = document.querySelector("#quiz");
 var resultsEl = document.querySelector("#results");
 var startEl = document.querySelector("#start");
-var submitEl = document.querySelector("#submit");
+// var submitEl = document.querySelector("#submit");
 var choicesEl = document.querySelector("#choiceSelection");
 var timeEl = document.querySelector("#timeLeft");
 
-var timer = 60;
-var score = 0;
+var timer = 60; //set time length of quiz
+var score = 0; //user score
 var i = 0; //index to track current question
-var j = 0;
 
 var questions = [
     {
@@ -77,9 +76,6 @@ var questions = [
 function startGame(){
 
     document.querySelector(".button").removeChild(startEl);
-    // var nextQuestion = document.createElement("button");
-    // nextQuestion.textContent="Next";
-    // document.querySelector(".button").appendChild(nextQuestion);
 
     quizEl.children[1].textContent=""; //removing p content
 
@@ -124,7 +120,7 @@ function startGame(){
 
 
     choiceA.addEventListener("click",function(){
-        j++;
+
         //Display Next Question
         if(i<6){
             i++;
@@ -148,7 +144,7 @@ function startGame(){
 
     });
     choiceB.addEventListener("click",function(){
-        j++;
+
         //conditional to check for answer
         if(i < 4){
             timer = timer - 10;
@@ -175,7 +171,7 @@ function startGame(){
 
     });
     choiceC.addEventListener("click",function(){
-        j++;
+
         //conditional to check for answer
         if(i == 2 || i == 4 || i == 5){
             timer = timer - 10;
@@ -202,7 +198,7 @@ function startGame(){
 
     });
     choiceD.addEventListener("click",function(){
-        j++;
+
         //conditional to check for answer
         if(i == 2 ){
             score++;
@@ -231,6 +227,7 @@ function startGame(){
 
 }
 function endGame(){
+    //When game ends, remove the buttons and update text
     choicesEl.removeChild(document.getElementById("choiceA"));
     choicesEl.removeChild(document.getElementById("choiceB"));
     choicesEl.removeChild(document.getElementById("choiceC"));
