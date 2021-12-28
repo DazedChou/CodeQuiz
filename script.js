@@ -18,7 +18,7 @@ var questions = [
             c: "alerts",
             d: "numbers"
         },
-        answer: "c"
+        correct: "c"
     },
     {
         question: "The condition in an if/else statement is enclosed within _______.",
@@ -78,9 +78,9 @@ console.log(quizEl.children[0]);
 function startGame(){
 
     document.querySelector(".button").removeChild(startEl);
-    var nextQuestion = document.createElement("button");
-    nextQuestion.textContent="Next";
-    document.querySelector(".button").appendChild(nextQuestion);
+    // var nextQuestion = document.createElement("button");
+    // nextQuestion.textContent="Next";
+    // document.querySelector(".button").appendChild(nextQuestion);
 
     quizEl.children[1].textContent="";
 
@@ -103,11 +103,15 @@ function startGame(){
         }
     }, 1000);
 
-    //Create button choices
+    //Create button choices with unique id
     var choiceA = document.createElement("button");
+    choiceA.setAttribute("id","choiceA")
     var choiceB = document.createElement("button");
+    choiceB.setAttribute("id","choiceB")
     var choiceC = document.createElement("button");
+    choiceC.setAttribute("id","choiceC")
     var choiceD = document.createElement("button");
+    choiceD.setAttribute("id","choiceD")
 
     choicesEl.appendChild(choiceA);
     choicesEl.appendChild(choiceB);
@@ -116,14 +120,125 @@ function startGame(){
 
     //Display quiz questions
 
-    //Question 1
     quizEl.children[0].textContent = questions[0].question;
     choiceA.textContent = "1." + questions[0].answers.a;
     choiceB.textContent = "2." +  questions[0].answers.b;
     choiceC.textContent = "3." +  questions[0].answers.c;
     choiceD.textContent = "4." +  questions[0].answers.d;
 
+    var j = 0;
+    //check selection
 
+    choiceA.addEventListener("click",function (){
+        if(j=0){
+            timer = timer - 10;
+            j++;
+        }
+        if(j=1){
+            timer = timer - 10;
+            j++;
+        }
+        if(j=2){
+            timer = timer - 10;
+            j++;
+        }
+        if(j=3){
+            timer = timer - 10;
+            j++;
+        }
+        if(j=4){
+            timer = timer - 10;
+            j++;
+        }
+        if(j=5){
+            timer = timer - 10;
+            j++;
+        }   
+        
+    });
+    choiceB.addEventListener("click",function (){
+        if(j=0){
+            timer = timer - 10;
+            j++;
+        }
+        if(j=1){
+            timer = timer - 10;
+            j++;
+        }
+        if(j=2){
+            timer = timer - 10;
+            j++;
+        }
+        if(j=3){
+            timer = timer - 10;
+            j++;
+        }
+        if(j=4){
+            score++;
+            j++;
+        }
+        if(j=5){
+            score++;
+            j++;
+        }   
+        
+    });
+    choiceC.addEventListener("click",function (){
+        if(j=0){
+            score++;
+            j++;
+        }
+        if(j=1){
+            score++;
+            j++;
+        }
+        if(j=2){
+            timer = timer - 10;
+            j++;
+        }
+        if(j=3){
+            score++;
+            j++;
+        }
+        if(j=4){
+            timer = timer - 10;
+            j++;
+        }
+        if(j=5){
+            timer = timer - 10;
+            j++;
+        }   
+        
+    });
+    choiceD.addEventListener("click",function (){
+        if(j=0){
+            timer = timer - 10;
+            j++;
+        }
+        if(j=1){
+            timer = timer - 10;
+            j++;
+        }
+        if(j=2){
+            score++;
+            j++;
+        }
+        if(j=3){
+            timer = timer - 10;
+            j++;
+        }
+        if(j=4){
+            timer = timer - 10;
+            j++;
+        }
+        if(j=5){
+            timer = timer - 10;
+            j++;
+        }   
+        
+    });
+
+    console.log(score);
 
 }
 
