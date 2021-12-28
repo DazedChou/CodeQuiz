@@ -90,8 +90,10 @@ function startGame(){
         timeEl.textContent = "Time Left: " + timer;
 
         if(timer === 0 || timer <=0){
+            timer = 0; //if timer is at 5 seconds, and user gets question wrong, timer 
+            //can become negative.
             clearInterval(timerInterval);
-
+            endGame(); //end game when timer reaches 0
             //Go display results
         }
     }, 1000);
