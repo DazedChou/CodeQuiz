@@ -8,21 +8,7 @@ var timeEl = document.querySelector("#timeLeft");
 var timer = 60;
 var score = 0;
 var i = 0; //index to track current question
-
-console.log(i);
-
-//create array of object of questions and corresponding answers
-// var question = ["Commonly used data types DO NOT include: ",
-// "The condition in an if/else statement is enclosed within _______.",
-// "Arrays in JavaScript can be used to store _______.",
-// "String values must be enclosed within ____ when being assigned to variables.",
-// "A very useful tool used during development and debugging for printing content to the debugger is: ",
-// "Inside which HTML element do we put the JavaScript?"];
-
-// var answerA = ["strings","quotes","numbers and strings","commas","Javascript","<js>"];
-// var answerB = ["booleans","curly brackets","other arrays","curly brackets","console.log","<script>"];
-// var answerC = ["alerts","parentheses","booleans","quotes","terminal/bash","<javascript>"];
-// var answerD = ["numbers","square brackets","all of the above","parenthesis","for loops","<scripting>"];
+var j = 0;
 
 var questions = [
     {
@@ -133,65 +119,124 @@ function startGame(){
     choiceC.textContent = "3." +  questions[i].answers.c;
     choiceD.textContent = "4." +  questions[i].answers.d;
 
+
+
     choiceA.addEventListener("click",function(){
-        i++;
-        quizEl.children[0].textContent = questions[i].question;
-        choiceA.textContent = "1." + questions[i].answers.a;
-        choiceB.textContent = "2." +  questions[i].answers.b;
-        choiceC.textContent = "3." +  questions[i].answers.c;
-        choiceD.textContent = "4." +  questions[i].answers.d;
+        j++;
+        //Display Next Question
+        if(i<6){
+            i++;
+        }
+
+
+        //Set condition to end game when last question has been answered
+        if(i == 6){
+            endGame();
+            clearInterval(timerInterval)
+        }else{
+            quizEl.children[0].textContent = questions[i].question;
+            choiceA.textContent = "1." + questions[i].answers.a;
+            choiceB.textContent = "2." +  questions[i].answers.b;
+            choiceC.textContent = "3." +  questions[i].answers.c;
+            choiceD.textContent = "4." +  questions[i].answers.d;
+        }
         //there is no question with the correct choice of A,
         //so whenever user chooses A, time gets deducted by 10.
         timer = timer - 10;
+
     });
     choiceB.addEventListener("click",function(){
-        i++;
-        quizEl.children[0].textContent = questions[i].question;
-        choiceA.textContent = "1." + questions[i].answers.a;
-        choiceB.textContent = "2." +  questions[i].answers.b;
-        choiceC.textContent = "3." +  questions[i].answers.c;
-        choiceD.textContent = "4." +  questions[i].answers.d;
-        
+        j++;
         //conditional to check for answer
         if(i < 4){
             timer = timer - 10;
         }else{
             score++;
         }
+        
+        //Display Next Question
+        if(i<6){
+            i++;
+        }
+
+        //Set condition to end game when last question has been answered
+        if(i == 6){
+            endGame();
+            clearInterval(timerInterval)
+        }else{
+            quizEl.children[0].textContent = questions[i].question;
+            choiceA.textContent = "1." + questions[i].answers.a;
+            choiceB.textContent = "2." +  questions[i].answers.b;
+            choiceC.textContent = "3." +  questions[i].answers.c;
+            choiceD.textContent = "4." +  questions[i].answers.d;
+        }
+
     });
     choiceC.addEventListener("click",function(){
-        i++;
-        quizEl.children[0].textContent = questions[i].question;
-        choiceA.textContent = "1." + questions[i].answers.a;
-        choiceB.textContent = "2." +  questions[i].answers.b;
-        choiceC.textContent = "3." +  questions[i].answers.c;
-        choiceD.textContent = "4." +  questions[i].answers.d;
-
+        j++;
         //conditional to check for answer
         if(i == 2 || i == 4 || i == 5){
             timer = timer - 10;
         }else{
             score++;
         }
+
+        //Display Next Question
+        if(i<6){
+            i++;
+        }
+        
+        //Set condition to end game when last question has been answered
+        if(i == 6){
+            clearInterval(timerInterval)
+            endGame();
+        }else{
+            quizEl.children[0].textContent = questions[i].question;
+            choiceA.textContent = "1." + questions[i].answers.a;
+            choiceB.textContent = "2." +  questions[i].answers.b;
+            choiceC.textContent = "3." +  questions[i].answers.c;
+            choiceD.textContent = "4." +  questions[i].answers.d;
+        }
+
     });
     choiceD.addEventListener("click",function(){
-        i++;
-        quizEl.children[0].textContent = questions[i].question;
-        choiceA.textContent = "1." + questions[i].answers.a;
-        choiceB.textContent = "2." +  questions[i].answers.b;
-        choiceC.textContent = "3." +  questions[i].answers.c;
-        choiceD.textContent = "4." +  questions[i].answers.d;
-
+        j++;
         //conditional to check for answer
         if(i == 2 ){
             score++;
         }else{
             timer = timer - 10;
         }
+
+        //Display Next Question
+        if(i<6){
+            i++;
+        }
+
+        //Set condition to end game when last question has been answered
+        if(i == 6){
+            clearInterval(timerInterval)
+            endGame();
+        }else{
+            quizEl.children[0].textContent = questions[i].question;
+            choiceA.textContent = "1." + questions[i].answers.a;
+            choiceB.textContent = "2." +  questions[i].answers.b;
+            choiceC.textContent = "3." +  questions[i].answers.c;
+            choiceD.textContent = "4." +  questions[i].answers.d;
+        }
+
     });
 
 }
+function endGame(){
+    choicesEl.removeChild(document.getElementById("choiceA"));
+    choicesEl.removeChild(document.getElementById("choiceB"));
+    choicesEl.removeChild(document.getElementById("choiceC"));
+    choicesEl.removeChild(document.getElementById("choiceD"));
 
+    document.querySelector("body").children[0].children[0].textContent = "All Done";
+    quizEl.children[0].textContent = "";
+}
 function displayResults(){
 
 }
@@ -202,3 +247,4 @@ startEl.addEventListener("click", function(){
     startGame();
 
 });
+
