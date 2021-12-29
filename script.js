@@ -7,7 +7,7 @@ var timeEl = document.querySelector("#timeLeft");
 
 var timer = 60; //set time length of quiz
 var score = 0; //user score
-var i = 0; //index to track current question
+
 
 var questions = [
     {
@@ -74,6 +74,7 @@ var questions = [
 
 
 function startGame(){
+    var i = 0; //index to track current question
 
     document.querySelector(".button").removeChild(startEl);
 
@@ -213,7 +214,7 @@ function startGame(){
 
         //Set condition to end game when last question has been answered
         if(i == 6){
-            clearInterval(timerInterval)
+            clearInterval(timerInterval);
             endGame();
         }else{
             quizEl.children[0].textContent = questions[i].question;
@@ -235,10 +236,33 @@ function endGame(){
 
     document.querySelector("body").children[0].children[0].textContent = "All Done";
     quizEl.children[0].textContent = "";
-}
-function displayResults(){
+
+    //prompt user to enter initials in text box
+    resultsEl.children[0].textContent = "Enter your initials below";
+    var textbox = document.createElement("input");
+    textbox.setAttribute("type","text");
+    resultsEl.appendChild(textbox);
+
+    var submit = document.createElement("button");
+    submit.textContent = "Submit"
+    resultsEl.appendChild(submit);
+
+    submit.addEventListener("click",function(){
+        this.preventDefault();
+        var name =[];
+        name.push(textbox.value);
+        console.log(name);
+        localStorage.setItem(textbox.value,score);
+        function hiscores();
+    });
+
 
 }
+// function displayResults(){
+//     var textbox = document.createElement("input");
+//     textbox.setAttribute("type","text");
+//     resultsEl.appendChild(textbox);
+// }
 
 //when the Start button is clicked, then start the game
 startEl.addEventListener("click", function(){
