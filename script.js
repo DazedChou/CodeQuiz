@@ -7,6 +7,7 @@ var timeEl = document.querySelector("#timeLeft");
 
 var timer = 60; //set time length of quiz
 var score = 0; //user score
+var name =[]; //empty array to store names and scores
 
 
 var questions = [
@@ -70,8 +71,17 @@ var questions = [
         },
         correct: "b"
     },
-]
+];
 
+//Create button choices with unique id
+var choiceA = document.createElement("button");
+choiceA.setAttribute("id","choiceA")
+var choiceB = document.createElement("button");
+choiceB.setAttribute("id","choiceB")
+var choiceC = document.createElement("button");
+choiceC.setAttribute("id","choiceC")
+var choiceD = document.createElement("button");
+choiceD.setAttribute("id","choiceD")
 
 function startGame(){
     var i = 0; //index to track current question
@@ -96,14 +106,14 @@ function startGame(){
     }, 1000);
 
     //Create button choices with unique id
-    var choiceA = document.createElement("button");
-    choiceA.setAttribute("id","choiceA")
-    var choiceB = document.createElement("button");
-    choiceB.setAttribute("id","choiceB")
-    var choiceC = document.createElement("button");
-    choiceC.setAttribute("id","choiceC")
-    var choiceD = document.createElement("button");
-    choiceD.setAttribute("id","choiceD")
+    // var choiceA = document.createElement("button");
+    // choiceA.setAttribute("id","choiceA")
+    // var choiceB = document.createElement("button");
+    // choiceB.setAttribute("id","choiceB")
+    // var choiceC = document.createElement("button");
+    // choiceC.setAttribute("id","choiceC")
+    // var choiceD = document.createElement("button");
+    // choiceD.setAttribute("id","choiceD")
 
     choicesEl.appendChild(choiceA);
     choicesEl.appendChild(choiceB);
@@ -244,20 +254,77 @@ function endGame(){
     resultsEl.appendChild(textbox);
 
     var submit = document.createElement("button");
-    submit.textContent = "Submit"
     resultsEl.appendChild(submit);
+    submit.textContent = "Submit"
 
     submit.addEventListener("click",function(){
         this.preventDefault();
-        var name =[];
+
         name.push(textbox.value);
         console.log(name);
         localStorage.setItem(textbox.value,score);
-        function hiscores();
+
+        //create list for hi scores
+        resultsEl.removeChild(textbox);
+        resultsEl.removeChild(submit);
+        var listEl = document.createElement("ul");
+        var li1 = document.createElement("li");
+        var li2 = document.createElement("li");
+        var li3 = document.createElement("li");
+        var li4 = document.createElement("li");
+        var li5 = document.createElement("li");
+        var li6 = document.createElement("li");
+    
+        resultsEl.appendChild(listEl);
+        listEl.appendChild(li1);
+        listEl.appendChild(li2);
+        listEl.appendChild(li3);
+        listEl.appendChild(li4);
+        listEl.appendChild(li5);
+        listEl.appendChild(li6);
+    
+        li1 = localStorage.getItem(name[0])
+    
+        var restartGame = document.createElement("button");
+        restartGame.textContent = "Play again";
+        resultsEl.appendChild(restartGame);
+        restartGame.addEventListener("click",startGame());
+
+
+        // hiscores();
     });
 
 
 }
+
+function hiscores(){
+    resultsEl.removeChild(textbox);
+    resultsEl.removeChild(submit);
+    var listEl = document.createElement("ul");
+    var li1 = document.createElement("li");
+    var li2 = document.createElement("li");
+    var li3 = document.createElement("li");
+    var li4 = document.createElement("li");
+    var li5 = document.createElement("li");
+    var li6 = document.createElement("li");
+
+    resultsEl.appendChild(listEl);
+    listEl.appendChild(li1);
+    listEl.appendChild(li2);
+    listEl.appendChild(li3);
+    listEl.appendChild(li4);
+    listEl.appendChild(li5);
+    listEl.appendChild(li6);
+
+    li1 = localStorage.getItem(name[0])
+
+    var restartGame = document.createElement("button");
+    restartGame.textContent = "Play again";
+    resultsEl.appendChild(restartGame);
+    restartGame.addEventListener("click",startGame());
+
+}
+
 // function displayResults(){
 //     var textbox = document.createElement("input");
 //     textbox.setAttribute("type","text");
