@@ -95,7 +95,7 @@ function createQuiz() {
         // startEl.textContent = "";
 
         //quizEl.children[1].textContent = ""; //removing p content
-        quizEl.children[1].setAttribute("style","display:none");
+        quizEl.children[1].setAttribute("style", "display:none");
         //create timer and update time every second
         var timerInterval = setInterval(function () {
 
@@ -262,24 +262,34 @@ function createQuiz() {
             resultsEl.children[0].textContent = "";
             localStorage.setItem(textbox.value, score);
 
-            //create list for hi scores
             resultsEl.removeChild(textbox);
             resultsEl.removeChild(submit);
-            var listEl = document.createElement("ul");
-            var li1 = document.createElement("li");
-            var li2 = document.createElement("li");
+
+            //create list for hi scores
+            // var listEl = document.createElement("ul");
+            // var li1 = document.createElement("li");
+            // var li2 = document.createElement("li");
 
 
-            resultsEl.appendChild(listEl);
-            listEl.appendChild(li1);
-            listEl.appendChild(li2);
+            // resultsEl.appendChild(listEl);
+            // listEl.appendChild(li1);
+            // listEl.appendChild(li2);
 
-            li1.textContent = textbox.value + localStorage.getItem(textbox.value);
+            // li1.textContent = textbox.value + localStorage.getItem(textbox.value);
 
+            //Restart Game
             var restartGame = document.createElement("button");
             restartGame.textContent = "Play again";
             resultsEl.appendChild(restartGame);
             restartGame.addEventListener("click", createQuiz);
+
+            //Clear High Scoress
+            var clearScore = document.createElement("button");
+            clearScore.textContent = "Clear Hiscores";
+            resultsEl.appendChild(clearScore);
+            clearScore.addEventListener("click",function(){
+                localStorage.clear();
+            });
 
 
             // hiscores();
@@ -329,6 +339,6 @@ function hiscores() {
 // }
 
 //when the Start button is clicked, then start the game
-startEl.addEventListener("click",createQuiz);
+startEl.addEventListener("click", createQuiz);
 
-hiscoreEl.addEventListener("click",hiscores)
+hiscoreEl.addEventListener("click", hiscores)
