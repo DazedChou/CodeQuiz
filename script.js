@@ -266,7 +266,7 @@ function createQuiz() {
             resultsEl.removeChild(submit);
 
             //create list for hi scores
-            // var listEl = document.createElement("ul");
+            var listEl = document.createElement("ul");
             // var li1 = document.createElement("li");
             // var li2 = document.createElement("li");
 
@@ -276,6 +276,21 @@ function createQuiz() {
             // listEl.appendChild(li2);
 
             // li1.textContent = textbox.value + localStorage.getItem(textbox.value);
+            
+            for(var i = 0; i < localStorage.length; i++){
+                var li = document.createElement("li");
+                resultsEl.appendChild(listEl);
+                listEl.appendChild(li);
+                li.textContent = localStorage.getItem(localStorage.key(i)) + " score: " + 
+                localStorage.getItem(localStorage.key(i));
+                // console.log(localStorage.getItem(localStorage.key(i)));
+            }
+            for (var key in localStorage){
+                console.log(key[0])
+            }
+
+
+
 
             //Restart Game
             var restartGame = document.createElement("button");
@@ -305,30 +320,15 @@ function createQuiz() {
 
 
 function hiscores() {
-    // resultsEl.removeChild(textbox);
-    // resultsEl.removeChild(submit);
-    // var listEl = document.createElement("ul");
-    // var li1 = document.createElement("li");
-    // var li2 = document.createElement("li");
-    // var li3 = document.createElement("li");
-    // var li4 = document.createElement("li");
-    // var li5 = document.createElement("li");
-    // var li6 = document.createElement("li");
 
-    // resultsEl.appendChild(listEl);
-    // listEl.appendChild(li1);
-    // listEl.appendChild(li2);
-    // listEl.appendChild(li3);
-    // listEl.appendChild(li4);
-    // listEl.appendChild(li5);
-    // listEl.appendChild(li6);
+    for(var i = 0; i < localStorage.length; i++){
+        console.log(localStorage.getItem(localStorage.key(i)));
+    }
 
-    li1 = localStorage.getItem(name[0])
-
-    var restartGame = document.createElement("button");
-    restartGame.textContent = "Play again";
-    resultsEl.appendChild(restartGame);
-    restartGame.addEventListener("click", startGame());
+    // var restartGame = document.createElement("button");
+    // restartGame.textContent = "Play again";
+    // resultsEl.appendChild(restartGame);
+    // restartGame.addEventListener("click", startGame());
 
 }
 
@@ -341,4 +341,4 @@ function hiscores() {
 //when the Start button is clicked, then start the game
 startEl.addEventListener("click", createQuiz);
 
-hiscoreEl.addEventListener("click", hiscores)
+hiscoreEl.addEventListener("click", hiscores);
