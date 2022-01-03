@@ -267,30 +267,15 @@ function createQuiz() {
 
             //create list for hi scores
             var listEl = document.createElement("ul");
-            // var li1 = document.createElement("li");
-            // var li2 = document.createElement("li");
 
-
-            // resultsEl.appendChild(listEl);
-            // listEl.appendChild(li1);
-            // listEl.appendChild(li2);
-
-            // li1.textContent = textbox.value + localStorage.getItem(textbox.value);
-            
-            for(var i = 0; i < localStorage.length; i++){
+            for (var i = 0; i < localStorage.length; i++) {
                 var li = document.createElement("li");
                 resultsEl.appendChild(listEl);
                 listEl.appendChild(li);
-                li.textContent = localStorage.getItem(localStorage.key(i)) + " score: " + 
-                localStorage.getItem(localStorage.key(i));
+                li.textContent = (localStorage.key(i)) + " -- score: " +
+                    localStorage.getItem(localStorage.key(i));
                 // console.log(localStorage.getItem(localStorage.key(i)));
             }
-            for (var key in localStorage){
-                console.log(key[0])
-            }
-
-
-
 
             //Restart Game
             var restartGame = document.createElement("button");
@@ -302,7 +287,7 @@ function createQuiz() {
             var clearScore = document.createElement("button");
             clearScore.textContent = "Clear Hiscores";
             resultsEl.appendChild(clearScore);
-            clearScore.addEventListener("click",function(){
+            clearScore.addEventListener("click", function () {
                 localStorage.clear();
             });
 
@@ -320,15 +305,25 @@ function createQuiz() {
 
 
 function hiscores() {
-
-    for(var i = 0; i < localStorage.length; i++){
-        console.log(localStorage.getItem(localStorage.key(i)));
+    document.querySelector("body").children[0].children[0].textContent = "High Scores";
+    quizEl.children[1].textContent="";
+    startEl.setAttribute("style","display:none");
+    //create list for hi scores
+    var listEl = document.createElement("ul");
+    for (var i = 0; i < localStorage.length; i++) {
+        var li = document.createElement("li");
+        resultsEl.appendChild(listEl);
+        listEl.appendChild(li);
+        li.textContent = (localStorage.key(i)) + " -- score: " +
+            localStorage.getItem(localStorage.key(i));
+        // console.log(localStorage.getItem(localStorage.key(i)));
     }
-
-    // var restartGame = document.createElement("button");
-    // restartGame.textContent = "Play again";
-    // resultsEl.appendChild(restartGame);
-    // restartGame.addEventListener("click", startGame());
+    var goBack = document.createElement("button");
+    goBack.textContent = "Back to Home";
+    resultsEl.appendChild(goBack);
+    goBack.addEventListener("click",function(){
+        return;
+    })
 
 }
 
