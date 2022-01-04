@@ -291,8 +291,6 @@ function createQuiz() {
                 localStorage.clear();
             });
 
-
-            // hiscores();
         });
 
 
@@ -327,11 +325,6 @@ function hiscores() {
 
 }
 
-// function displayResults(){
-//     var textbox = document.createElement("input");
-//     textbox.setAttribute("type","text");
-//     resultsEl.appendChild(textbox);
-// }
 
 //when the Start button is clicked, then start the game
 startEl.addEventListener("click", createQuiz);
